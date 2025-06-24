@@ -1,0 +1,16 @@
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-openai>=0.0.5
+langchain-chroma>=0.2.4
+chromadb>=0.4.0
+openai>=1.10.0
+tiktoken>=0.5.2
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+pypdf2>=3.0.1
+python-docx>=1.1.0 
+
+uvicorn main:app --reload --host 0.0.0.0 --port 8001 --log-level debug
