@@ -35,7 +35,7 @@ export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const API_BASE_URL = 'http://localhost:8001';
+  const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000';
 
   useEffect(() => {
     fetchDocuments();
@@ -52,7 +52,7 @@ export default function Home() {
 
   const fetchDocuments = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/documents`);
+      const response = await fetch(`${API_BASE_URL}/documents/`);
       const data = await response.json();
       setDocuments(data.documents);
     } catch (error) {
@@ -62,7 +62,7 @@ export default function Home() {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/stats`);
+      const response = await fetch(`${API_BASE_URL}/stats/`);
       const data = await response.json();
       setStats(data);
     } catch (error) {
@@ -78,7 +78,7 @@ export default function Home() {
     formData.append('file', selectedFile);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/upload`, {
+      const response = await fetch(`${API_BASE_URL}/documents/upload`, {
         method: 'POST',
         body: formData,
       });
@@ -122,7 +122,7 @@ export default function Home() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/ask`, {
+      const response = await fetch(`${API_BASE_URL}/qa/ask`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
